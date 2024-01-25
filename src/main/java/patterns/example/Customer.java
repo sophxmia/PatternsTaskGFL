@@ -53,6 +53,4 @@ class Customer {
         result += "You earned " + frequentRenterPoints + " frequent renter points";
         return result;
     }
-
-
 }
