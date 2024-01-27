@@ -8,6 +8,8 @@ public class Movie {
     private final String director;
     private final String actors;
 
+    private final PricingStrategy pricingStrategy;
+
     public enum MovieType {
         REGULAR, NEW_RELEASE, CHILDRENS
     }
@@ -19,6 +21,22 @@ public class Movie {
         this.shortDescription = shortDescription;
         this.director = director;
         this.actors = actors;
+        this.pricingStrategy = createPricingStrategy(priceCode);
+    }
+
+    private PricingStrategy createPricingStrategy(MovieType priceCode) {
+        switch (priceCode) {
+            case REGULAR -> {
+                return new RegularPricingStrategy();
+            }
+            case NEW_RELEASE -> {
+                return new NewReleasePricingStrategy();
+            }
+            case CHILDRENS -> {
+                return new ChildrensPricingStrategy();
+            }
+            default -> throw new IllegalArgumentException("Unknown price code");
+        }
     }
 
     public MovieType getPriceCode() {
@@ -28,6 +46,7 @@ public class Movie {
     public String getTitle() {
         return title;
     }
+
     public String getCountryOfOrigin() {
         return countryOfOrigin;
     }
@@ -42,5 +61,13 @@ public class Movie {
 
     public String getActors() {
         return actors;
+    }
+
+    public double calculateRentalCost(int daysRented) {
+        return pricingStrategy.calculateRentalCost(daysRented);
+    }
+
+    public int calculateFrequentRenterPoints(int daysRented) {
+        return pricingStrategy.calculateFrequentRenterPoints(daysRented);
     }
 }
