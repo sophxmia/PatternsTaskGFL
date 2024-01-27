@@ -8,9 +8,13 @@ import static patterns.example.Movie.MovieType.*;
 public class Main {
 
     public static void main(String[] args) {
-        List<Rental> rentals = List.of(new Rental(new Movie("Rambo", REGULAR), 1),
-                new Rental(new Movie("Lord of the Rings", NEW_RELEASE), 4),
-                new Rental(new Movie("Harry Potter", CHILDRENS), 5));
+        Movie movie1 = new MovieBuilder("Rambo", REGULAR).build();
+        Movie movie2 = new MovieBuilder("Lord of the Rings", NEW_RELEASE).build();
+        Movie movie3 = new MovieBuilder("Harry Potter", CHILDRENS).build();
+
+        List<Rental> rentals = List.of(new Rental(movie1, 1),
+                new Rental(movie2, 4),
+                new Rental(movie3, 5));
 
         Customer customer = new Customer("John Doe", rentals);
         String statement = customer.statement();
