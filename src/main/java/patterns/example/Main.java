@@ -16,7 +16,7 @@ public class Main {
                 new Rental(movie2, 4),
                 new Rental(movie3, 5));
 
-        Customer customer = new Customer("John Doe", rentals);
+        Customer customer = new RegularCustomer("John Doe", rentals);
         String statement = customer.statement();
 
         System.out.println(statement);
