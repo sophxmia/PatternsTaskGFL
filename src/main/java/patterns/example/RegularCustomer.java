@@ -10,11 +10,11 @@ public class RegularCustomer extends Customer {
 
     @Override
     protected double calculateRentalCost(Rental rental) {
-        return 0.0;
+        return rental.getMovie().calculateRentalCost(rental.getDaysRented());
     }
 
     @Override
     protected int calculateFrequentRenterPoints(Rental rental) {
-        return 0;
+        return rental.getMovie().calculateFrequentRenterPoints(rental.getDaysRented());
     }
 }
