@@ -28,10 +28,42 @@ public class Program {
                 case 2:
                     removeMovie();
                     break;
+                case 3:
+                    searchMovies();
+                    break;
+                case 4:
+                    displayCatalog();
                 default:
                     System.out.println("Invalid command");
             }
         }
+    }
+
+    private void displayCatalog() {
+        List<Movie> movies = movieCatalog.getMovies();
+        if (movies.isEmpty()) {
+            System.out.println("The movie catalog is empty.");
+        } else {
+            System.out.println("Movie Catalog:");
+            for (Movie movie : movies) {
+                System.out.println("Title: " + movie.getTitle());
+                System.out.println("Price code: " + movie.getPriceCode());
+                System.out.println("Country of Origin: " + movie.getCountryOfOrigin());
+                System.out.println("Short description: " + movie.getShortDescription());
+                System.out.println("Director: " + movie.getDirector());
+                System.out.println("Actors: " + movie.getActors());
+            }
+        }
+    }
+
+    private void searchMovies() {
+        System.out.println("Enter search criteria: ");
+        scanner.nextLine();
+
+        String searchQuery = scanner.nextLine();
+
+        Command searchCommand = new SearchMovieCommand(movieCatalog.getMovies(), searchQuery);
+        searchCommand.execute();
     }
 
     private void displayMenu() {
